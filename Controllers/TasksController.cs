@@ -20,7 +20,6 @@ namespace TaskBoard.Controllers
 
         private string User => HttpContext.Items["User"]?.ToString() ?? "unknown";
 
-        // ---------------- GET TASKS ----------------
         [HttpGet]
         [ProducesResponseType(typeof(PagedResult<TaskItem>), StatusCodes.Status200OK)]
         public async Task<ActionResult<PagedResult<TaskItem>>> Get()
@@ -36,7 +35,6 @@ namespace TaskBoard.Controllers
             });
         }
 
-        // ---------------- CREATE TASK ----------------
         [HttpPost]
         [ProducesResponseType(typeof(TaskItem), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -72,7 +70,6 @@ namespace TaskBoard.Controllers
             return Created();
         }
 
-        // ---------------- UPDATE TASK ----------------
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(TaskItem), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -104,7 +101,6 @@ namespace TaskBoard.Controllers
             return Ok(task);
         }
 
-        // ---------------- DELETE TASK ----------------
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -130,7 +126,6 @@ namespace TaskBoard.Controllers
             return NoContent();
         }
 
-        // ---------------- ADD COMMENT ----------------
         [HttpPost("{id}/comments")]
         [ProducesResponseType(typeof(Comment), StatusCodes.Status201Created)]
         public async Task<ActionResult<Comment>> AddComment(Guid id, [FromBody] CommentCreateDto dto)
@@ -153,7 +148,6 @@ namespace TaskBoard.Controllers
             return Created();
         }
 
-        // ---------------- GET COMMENTS ----------------
         [HttpGet("{id}/comments")]
         [ProducesResponseType(typeof(List<Comment>), StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Comment>>> GetComments(Guid id)

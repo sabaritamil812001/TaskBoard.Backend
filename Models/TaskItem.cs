@@ -21,7 +21,7 @@ namespace TaskBoard.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        [Timestamp] // Optimistic concurrency
+        [Timestamp] 
         public byte[] RowVersion { get; set; }
     }
 }

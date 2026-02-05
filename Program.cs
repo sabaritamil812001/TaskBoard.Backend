@@ -6,7 +6,6 @@ using TaskBoard.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Controllers + string enums
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -15,7 +14,6 @@ builder.Services.AddControllers()
         );
     });
 
-// ✅ Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -43,13 +41,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ✅ DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-// ✅ CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
@@ -64,14 +60,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ✅ Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// ✅ Enable CORS
 app.UseCors("AllowAngular");
 
-// ✅ Header-based auth (skip swagger)
 app.Use(async (context, next) =>
 {
     if (context.Request.Path.StartsWithSegments("/swagger"))

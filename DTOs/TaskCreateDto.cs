@@ -10,7 +10,6 @@ namespace TaskBoard.DTOs
 
         public string? Description { get; set; }
 
-        // ✅ THIS IS THE CORRECT PROPERTY
         public TaskItemStatus Status { get; set; }
 
         public Priority Priority { get; set; }
