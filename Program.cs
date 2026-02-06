@@ -48,11 +48,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
+    options.AddPolicy("AllowReact",
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:4200")
+                .WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -63,7 +63,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors("AllowAngular");
+app.UseCors("AllowReact");
 
 app.Use(async (context, next) =>
 {
